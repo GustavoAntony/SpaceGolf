@@ -1,5 +1,5 @@
 import pygame
-from Class import Rocket
+from Rocket import Rocket
 
 pygame.init()
 
