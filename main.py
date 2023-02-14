@@ -1,5 +1,5 @@
 import pygame
-from Rocket import Rocket
+from Ball import Ball
 
 pygame.init()
 
@@ -13,9 +13,9 @@ while rodando:
         if event.type == pygame.QUIT:
             rodando = False
     
-    rocket = Rocket()
+    ball = Ball()
     screen.fill((0,0,0))
-    screen.blit(rocket.surf,(500,350))
+    screen.blit(ball.surf,(500,350))
     # Update!
     pygame.display.update()
 
