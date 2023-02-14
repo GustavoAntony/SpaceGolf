@@ -1,23 +1,21 @@
 import pygame
-from Ball import Ball
+from functions import *
 
 pygame.init()
 
-screen= pygame.display.set_mode((1000,700))
 
+running = True
+window = "inicial"
+while running:
 
-rodando = True
-while rodando:
     # Capturar eventos
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            rodando = False
-    
-    ball = Ball()
-    screen.fill((0,0,0))
-    screen.blit(ball.surf,(500,350))
+    if window == "inicial":
+        running,window = inicial_screen(running,window)
+    elif window == "nivel_1":
+        running,window = game_screen(running,window)
     # Update!
     pygame.display.update()
 
 # Terminar tela
 pygame.quit()
+
