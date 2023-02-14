@@ -1,8 +1,9 @@
 import pygame
+from Class import Rocket
 
 pygame.init()
 
-screen= pygame.display.set_mode((500,600))
+screen= pygame.display.set_mode((1000,700))
 
 
 rodando = True
@@ -12,6 +13,9 @@ while rodando:
         if event.type == pygame.QUIT:
             rodando = False
     
+    rocket = Rocket()
+    screen.fill((0,0,0))
+    screen.blit(rocket.surf,(500,350))
     # Update!
     pygame.display.update()
 
