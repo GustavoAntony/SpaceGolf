@@ -16,7 +16,7 @@ def inicial_screen(running, window):
     return running, window
     
     
-def game_screen(running, window):
+def nivel_1(running, window):
     ball = Ball()
     while window == "nivel_1":
         for event in pygame.event.get():

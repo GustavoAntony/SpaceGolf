@@ -12,7 +12,7 @@ while running:
     if window == "inicial":
         running,window = inicial_screen(running,window)
     elif window == "nivel_1":
-        running,window = game_screen(running,window)
+        running,window = nivel_1(running,window)
     # Update!
     pygame.display.update()
 
