@@ -7,3 +7,5 @@ class Ball(pygame.sprite.Sprite):
         self.surf.fill((255, 255, 255))
         self.rect = self.surf.get_rect()
         self.pos = [350,450]
+        self.velocity = (0, 0)
+        self.color = (255, 255, 0)

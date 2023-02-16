@@ -2,6 +2,8 @@ import pygame
 from functions import *
 
 pygame.init()
+# font = pygame.font.SysFont(None, 30)
+
 
 
 running = True
