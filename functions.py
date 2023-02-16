@@ -1,8 +1,12 @@
 import pygame
 from Ball import Ball
 
-screen= pygame.display.set_mode((1000,700))
+HEIGHT = 900
+WIDTH = 700
+screen= pygame.display.set_mode((WIDTH,HEIGHT))
 
+
+#TELA INICIAL
 def inicial_screen(running, window):
     window = "inicial"
     for event in pygame.event.get():
@@ -11,7 +15,7 @@ def inicial_screen(running, window):
         elif event.type == pygame.QUIT:
             running = False
     
-        screen.fill((255,255,255))
+        screen.fill((0,0,0))
         pygame.display.update()
     return running, window
     
@@ -19,6 +23,11 @@ def inicial_screen(running, window):
 def nivel_1(running, window):
     ball = Ball()
     while window == "nivel_1":
+        ball.pos[0] += 0.02
+        ball.pos[1] += 0.01
+        if (ball.pos[0] > WIDTH or ball.pos[0] <0 )or (ball.pos[1] > HEIGHT or ball.pos[1] < 0):
+            ball.pos[0] = WIDTH/2
+            ball.pos[1] = HEIGHT/2
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_0:
