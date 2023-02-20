@@ -1,5 +1,6 @@
 import pygame
 from Ball import Ball
+from Planet import Planet
 import math
 import numpy as np
 from Button import Button
@@ -68,14 +69,17 @@ def inicial_screen(running, window):
     
 def nivel_1(running, window):
     ball = Ball()
+    planets = [Planet(10, np.array([WIDTH/2,HEIGHT/2]))]
     start_pos = ball.pos
     print ("nivel 1")
     while window == "nivel_1":
         
-        if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
-            ball.velocity[0] *= -1
-        if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
-            ball.velocity[1] *= -1
+        # if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
+        #     ball.velocity[0] *= -1
+        # if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
+        #     ball.velocity[1] *= -1
+
+        
 
             
         for event in pygame.event.get():
@@ -97,8 +101,18 @@ def nivel_1(running, window):
                 force_magnitude = min(math.sqrt(force_vector[0]**2 + force_vector[1]**2), FORCE_MAX)
                 force_normalized = [force_vector[0]/force_magnitude, force_vector[1]/force_magnitude]
                 ball.velocity = [force_normalized[0]*force_magnitude/BALL_MASS*0.003*(-1), force_normalized[1]*force_magnitude/BALL_MASS*(-1)*0.003]
+                ball.launched = True
+
+        
+
         # Atualiza a posição da bola de acordo com a velocidade
-        ball.pos = (ball.pos[0] + ball.velocity[0], ball.pos[1] + ball.velocity[1])
+        ball.pos = (ball.pos[0] + ball.velocity[0], ball.pos[1] + ball.velocity[1]) 
+
+        if ball.launched:
+
+            for planet in planets :
+                ball.velocity = ball.velocity + planet.atract(ball)
+                ball.pos = ball.pos + ball.velocity*0.001
         
 
         screen.fill((0,0,0))
@@ -125,6 +139,8 @@ def nivel_1(running, window):
             # screen.blit(ball.surf,(ball.pos[0],ball.pos[1]))
             # Update!
         pygame.draw.circle(screen, ball.color, ball.pos, 10)
+        for planet in planets:
+            pygame.draw.circle(screen, ball.color, planet.pos, 50)
         pygame.display.update()
 
 
