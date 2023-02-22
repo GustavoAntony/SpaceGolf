@@ -1,6 +1,8 @@
 import pygame
 from Ball import Ball
 from Planet import Planet
+from Buraco import Buraco
+from BuracoDeMinhoca import BuracoDeMinhoca
 import math
 import numpy as np
 from Button import Button
@@ -70,17 +72,24 @@ def inicial_screen(running, window):
 def nivel_1(running, window):
     ball = Ball()
     planets = [Planet(10, np.array([WIDTH/2,HEIGHT/2]))]
+    buraco = Buraco(np.array([5,5]))
+    minhoca = BuracoDeMinhoca(np.array([WIDTH,HEIGHT]), np.array([200,105]))
+
     start_pos = ball.pos
+
     print ("nivel 1")
     while window == "nivel_1":
         
-        # if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
-        #     ball.velocity[0] *= -1
-        # if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
-        #     ball.velocity[1] *= -1
+        if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
+            ball.velocity[0] *= -1
+        if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
+            ball.velocity[1] *= -1
 
-        
 
+        minhoca.teleport(ball)
+
+        if buraco.acerto(ball):
+            window = "inicial"
             
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -107,6 +116,7 @@ def nivel_1(running, window):
 
         # Atualiza a posição da bola de acordo com a velocidade
         ball.pos = (ball.pos[0] + ball.velocity[0], ball.pos[1] + ball.velocity[1]) 
+        ball.rect.topleft = ball.pos
 
         if ball.launched:
 
@@ -139,6 +149,9 @@ def nivel_1(running, window):
             # screen.blit(ball.surf,(ball.pos[0],ball.pos[1]))
             # Update!
         pygame.draw.circle(screen, ball.color, ball.pos, 10)
+        pygame.draw.circle(screen, ball.color, buraco.pos, 60)
+        pygame.draw.circle(screen, "blue", minhoca.entrada, 50)
+        pygame.draw.circle(screen, "red", minhoca.saida, 50)
         for planet in planets:
             pygame.draw.circle(screen, ball.color, planet.pos, 50)
         pygame.display.update()

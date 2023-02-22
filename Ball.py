@@ -8,7 +8,11 @@ class Ball(pygame.sprite.Sprite):
         self.surf.fill((255, 255, 255))
         self.rect = self.surf.get_rect()
         self.pos = np.array([350,650])
+        self.rect.topleft = self.pos
         self.velocity = np.array([0, 0])
         self.color = (255, 255, 0)
         self.mass = 10
         self.launched = False
+
+    def pos_u (self):
+        self.rect.topleft = self.pos()

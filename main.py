@@ -16,8 +16,4 @@ while running:
     elif window == "nivel_1":
         running,window = nivel_1(running,window)
     # Update!
-    pygame.display.update()
-
-# Terminar tela
-pygame.quit()
 
