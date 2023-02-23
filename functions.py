@@ -18,7 +18,9 @@ screen= pygame.display.set_mode((WIDTH,HEIGHT))
 # font = pygame.font.SysFont(None, 30)
 background_inicial = pygame.image.load("images\space_golf.png")
 
+pygame.mixer.init()
 
+batida = pygame.mixer.Sound("music/hurt_c_08-102842.mp3")
 #TELA INICIAL
 def inicial_screen(running, window):
     window = 'inicial'
@@ -89,11 +91,13 @@ def nivel_1(running, window):
             ball.velocity = np.array([0, 0])
             ball.lifes -=1
             ball.launched = False
+            batida.play()
         if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
             ball.pos = np.array([350,650])
             ball.lifes -= 1
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            batida.play()
 
 
         if buraco.acerto(ball):
@@ -182,6 +186,7 @@ def nivel_2(running, window):
                 ball.velocity = np.array([0, 0])
                 ball.lifes -=1
                 ball.launched = False
+                batida.play()
 
 
 
@@ -190,11 +195,15 @@ def nivel_2(running, window):
             ball.velocity = np.array([0, 0])
             ball.lifes -=1
             ball.launched = False
+            batida.play()
+
         if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
             ball.pos = np.array([350,650])
             ball.lifes -= 1
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            batida.play()
+
 
         
         if buraco.acerto(ball):
@@ -287,6 +296,8 @@ def nivel_3(running, window):
                 ball.velocity = np.array([0, 0])
                 ball.lifes -=1
                 ball.launched = False
+                batida.play()
+
 
 
         if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
@@ -294,11 +305,15 @@ def nivel_3(running, window):
             ball.velocity = np.array([0, 0])
             ball.lifes -=1
             ball.launched = False
+            batida.play()
+
         if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
             ball.pos = np.array([350,650])
             ball.lifes -= 1
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            batida.play()
+
 
         minhoca.teleport(ball)
 
@@ -387,6 +402,8 @@ def nivel_4(running, window):
                 ball.velocity = np.array([0, 0])
                 ball.lifes -=1
                 ball.launched = False
+                batida.play()
+
 
 
         if ball.pos[0]> WIDTH-ball.radius or ball.pos[0] < ball.radius:
@@ -394,11 +411,15 @@ def nivel_4(running, window):
             ball.velocity = np.array([0, 0])
             ball.lifes -=1
             ball.launched = False
+            batida.play()
+
         if ball.pos[1]> HEIGHT-ball.radius or ball.pos[1] < ball.radius :
             ball.pos = np.array([350,650])
             ball.lifes -= 1
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            batida.play()
+
 
 
         if buraco.acerto(ball):
