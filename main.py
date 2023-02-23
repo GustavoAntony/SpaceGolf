@@ -20,5 +20,7 @@ while running:
         running,window = nivel_2(running,window)
     elif window == "nivel_3":
         running,window = nivel_3(running,window)
+    elif window == "nivel_4":
+        running,window = nivel_4(running,window)
     # Update!
 
