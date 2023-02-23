@@ -25,6 +25,4 @@ class BuracoDeMinhoca(pygame.sprite.Sprite):
         distancia = math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
 
         if distancia <= (self.radius+ball.radius):
-            return True
-        else :
-            return False
+            ball.pos = self.saida
