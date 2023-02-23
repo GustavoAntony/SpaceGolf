@@ -16,6 +16,7 @@ INITIAL_VELOCITY = 0.3
 
 screen= pygame.display.set_mode((WIDTH,HEIGHT))
 # font = pygame.font.SysFont(None, 30)
+background_inicial = pygame.image.load("images\space_golf.png")
 
 
 #TELA INICIAL
@@ -28,13 +29,10 @@ def inicial_screen(running, window):
     screen_height = 900
     background_color = (255, 255, 255)
 
+
     screen = pygame.display.set_mode((screen_width, screen_height))
 
-    start_button_width = 200
-    start_button_height = 50
-    start_button_x = (screen_width - start_button_width) // 2
-    start_button_y = screen_height // 2 - 50
-    start_button = pygame.Rect(start_button_x, start_button_y, start_button_width, start_button_height)
+    start_button = pygame.Rect(170, 375, 360, 110)
 
     exit_button_width = 200
     exit_button_height = 50
@@ -55,17 +53,23 @@ def inicial_screen(running, window):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_KP_ENTER or event.key == pygame.K_RETURN:
                     print("Botão Start clicado!")
-                    window = "nivel_1"
+                    window = "nivel_2"
 
             if event.type == pygame.MOUSEBUTTONDOWN and exit_button.collidepoint(event.pos):
                 pygame.quit()
                 sys.exit()
+            
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print(pygame.mouse.get_pos())
+                if start_button.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
+                    window ="nivel_2"
 
         screen.fill(background_color)
         pygame.draw.rect(screen, (255, 0, 0), start_button) # desenha o botão "Start"
         pygame.draw.rect(screen, (255, 0, 0), exit_button) # desenha o botão "Sair"
         screen.blit(start_text, (start_button.x +25, start_button.y + 15)) # desenha o texto "Start"
         screen.blit(exit_text, (exit_button.x + 80, exit_button.y + 15)) # desenha o texto "Sair"
+        screen.blit(background_inicial, (0,0))
         pygame.display.update()
 
     return True, window
@@ -78,7 +82,7 @@ def nivel_1(running, window):
 
 
     print(ball.surf.get_rect())
-
+    toque_valido = False
     start_pos = ball.pos
 
     print ("nivel 1")
@@ -102,7 +106,7 @@ def nivel_1(running, window):
 
 
         if buraco.acerto(ball):
-            window = "nivel_2"
+            window = "inicial"
             
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -114,7 +118,7 @@ def nivel_1(running, window):
             elif event.type == pygame.MOUSEBUTTONDOWN:
             # Quando o mouse é pressionado, armazena a posição inicial
                 start_pos = pygame.mouse.get_pos()
-            elif event.type == pygame.MOUSEBUTTONUP:
+            elif event.type == pygame.MOUSEBUTTONUP and toque_valido == True:
                 # Quando o mouse é solto, calcula a força e a velocidade e aplica na bola
                 end_pos = pygame.mouse.get_pos()
                 force_vector = [end_pos[0] - start_pos[0], end_pos[1] - start_pos[1]]
@@ -124,6 +128,8 @@ def nivel_1(running, window):
                 force_normalized = [force_vector[0]/force_magnitude, force_vector[1]/force_magnitude]
                 ball.velocity = [force_normalized[0]*force_magnitude/BALL_MASS*0.003*(-1), force_normalized[1]*force_magnitude/BALL_MASS*(-1)*0.003]
                 ball.launched = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                toque_valido = True
 
         
         # Atualiza a posição da bola de acordo com a velocidade
@@ -164,7 +170,7 @@ def nivel_2(running, window):
     ball = Ball()
     planets = [Planet(100, np.array([WIDTH/2,HEIGHT/2]))]
     buraco = Buraco(np.array([WIDTH/2,60]))
-
+    toque_valido = False
     start_pos = ball.pos
 
     print ("nivel 2")
@@ -208,7 +214,7 @@ def nivel_2(running, window):
             elif event.type == pygame.MOUSEBUTTONDOWN:
             # Quando o mouse é pressionado, armazena a posição inicial
                 start_pos = pygame.mouse.get_pos()
-            elif event.type == pygame.MOUSEBUTTONUP:
+            elif event.type == pygame.MOUSEBUTTONUP and toque_valido == True:
                 # Quando o mouse é solto, calcula a força e a velocidade e aplica na bola
                 end_pos = pygame.mouse.get_pos()
                 force_vector = [end_pos[0] - start_pos[0], end_pos[1] - start_pos[1]]
@@ -218,6 +224,8 @@ def nivel_2(running, window):
                 force_normalized = [force_vector[0]/force_magnitude, force_vector[1]/force_magnitude]
                 ball.velocity = [force_normalized[0]*force_magnitude/BALL_MASS*0.003*(-1), force_normalized[1]*force_magnitude/BALL_MASS*(-1)*0.003]
                 ball.launched = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                toque_valido = True
 
         
         # Atualiza a posição da bola de acordo com a velocidade
