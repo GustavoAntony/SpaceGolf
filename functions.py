@@ -33,16 +33,11 @@ def inicial_screen(running, window):
     screen = pygame.display.set_mode((screen_width, screen_height))
 
     start_button = pygame.Rect(170, 375, 360, 110)
-
-    exit_button_width = 200
-    exit_button_height = 50
-    exit_button_x = (screen_width - exit_button_width) // 2
-    exit_button_y = screen_height // 2 +25
-    exit_button = pygame.Rect(exit_button_x, exit_button_y, exit_button_width, exit_button_height)
+    tutorial_button = pygame.Rect(217,572,265,81)
+    exit_button = pygame.Rect(217,691,265,81)
 
     font = pygame.font.Font(None, 36)
-    start_text = font.render("Enter to start", True, (0, 0, 0))
-    exit_text = font.render("Sair", True, (0, 0, 0))
+
 
     while window == "inicial":
         for event in pygame.event.get():
@@ -54,21 +49,19 @@ def inicial_screen(running, window):
                 if event.key == pygame.K_KP_ENTER or event.key == pygame.K_RETURN:
                     print("Botão Start clicado!")
                     window = "nivel_2"
-
-            if event.type == pygame.MOUSEBUTTONDOWN and exit_button.collidepoint(event.pos):
-                pygame.quit()
-                sys.exit()
             
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print(pygame.mouse.get_pos())
                 if start_button.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
                     window ="nivel_2"
+                elif tutorial_button.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
+                    window ="nivel_1"
+                elif exit_button.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
+                    pygame.quit()
+                    sys.exit()
+
 
         screen.fill(background_color)
-        pygame.draw.rect(screen, (255, 0, 0), start_button) # desenha o botão "Start"
-        pygame.draw.rect(screen, (255, 0, 0), exit_button) # desenha o botão "Sair"
-        screen.blit(start_text, (start_button.x +25, start_button.y + 15)) # desenha o texto "Start"
-        screen.blit(exit_text, (exit_button.x + 80, exit_button.y + 15)) # desenha o texto "Sair"
         screen.blit(background_inicial, (0,0))
         pygame.display.update()
 
