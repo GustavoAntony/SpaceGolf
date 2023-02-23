@@ -13,6 +13,7 @@ class Ball(pygame.sprite.Sprite):
         self.color = (255, 255, 0)
         self.mass = 10
         self.launched = False
+        self.lifes = 3
 
     def pos_u (self):
         self.rect.topleft = self.pos()

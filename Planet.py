@@ -22,7 +22,7 @@ class Planet(pygame.sprite.Sprite):
         # a = direcao_a * mag_a
 
 
-        C = 100
+        C = 10
 
         direction = (self.pos - other.pos)
         

@@ -6,11 +6,14 @@ from BuracoDeMinhoca import BuracoDeMinhoca
 import math
 import numpy as np
 from Button import Button
+import pygame
+import sys
 HEIGHT = 900
 WIDTH = 700
 FORCE_MAX = 10.0
 BALL_MASS = 1.0
 INITIAL_VELOCITY = 0.3
+
 screen= pygame.display.set_mode((WIDTH,HEIGHT))
 # font = pygame.font.SysFont(None, 30)
 
@@ -18,8 +21,6 @@ screen= pygame.display.set_mode((WIDTH,HEIGHT))
 #TELA INICIAL
 def inicial_screen(running, window):
     window = 'inicial'
-    import pygame
-    import sys
 
     pygame.init()
 
@@ -42,7 +43,7 @@ def inicial_screen(running, window):
     exit_button = pygame.Rect(exit_button_x, exit_button_y, exit_button_width, exit_button_height)
 
     font = pygame.font.Font(None, 36)
-    start_text = font.render("Start", True, (0, 0, 0))
+    start_text = font.render("Enter to start", True, (0, 0, 0))
     exit_text = font.render("Sair", True, (0, 0, 0))
 
     while window == "inicial":
@@ -51,9 +52,10 @@ def inicial_screen(running, window):
                 pygame.quit()
                 sys.exit()
 
-            if event.type == pygame.MOUSEBUTTONDOWN and start_button.collidepoint(event.pos):
-                print("Botão Start clicado!")
-                window = "nivel_1"
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_KP_ENTER or event.key == pygame.K_RETURN:
+                    print("Botão Start clicado!")
+                    window = "nivel_1"
 
             if event.type == pygame.MOUSEBUTTONDOWN and exit_button.collidepoint(event.pos):
                 pygame.quit()
@@ -62,7 +64,7 @@ def inicial_screen(running, window):
         screen.fill(background_color)
         pygame.draw.rect(screen, (255, 0, 0), start_button) # desenha o botão "Start"
         pygame.draw.rect(screen, (255, 0, 0), exit_button) # desenha o botão "Sair"
-        screen.blit(start_text, (start_button.x + 70, start_button.y + 15)) # desenha o texto "Start"
+        screen.blit(start_text, (start_button.x +25, start_button.y + 15)) # desenha o texto "Start"
         screen.blit(exit_text, (exit_button.x + 80, exit_button.y + 15)) # desenha o texto "Sair"
         pygame.display.update()
 
@@ -79,11 +81,21 @@ def nivel_1(running, window):
 
     print ("nivel 1")
     while window == "nivel_1":
-        
+        if ball.lifes == 0:
+            window = "inicial"
+            break
+
+
         if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
-            ball.velocity[0] *= -1
+            ball.pos = np.array([350,650])
+            ball.velocity = np.array([0, 0])
+            ball.lifes -=1
+            ball.launched = False
         if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
-            ball.velocity[1] *= -1
+            ball.pos = np.array([350,650])
+            ball.lifes -= 1
+            ball.velocity = np.array([0, 0])
+            ball.launched = False
 
 
         minhoca.teleport(ball)
