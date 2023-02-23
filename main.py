@@ -17,5 +17,7 @@ while running:
         running,window = inicial_screen(running,window)
     elif window == "nivel_1":
         running,window = nivel_1(running,window)
+    elif window == "nivel_2":
+        running,window = nivel_2(running,window)
     # Update!
 

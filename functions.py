@@ -73,9 +73,11 @@ def inicial_screen(running, window):
     
 def nivel_1(running, window):
     ball = Ball()
-    planets = [Planet(10, np.array([WIDTH/2,HEIGHT/2]))]
-    buraco = Buraco(np.array([5,5]))
-    minhoca = BuracoDeMinhoca(np.array([WIDTH,HEIGHT]), np.array([200,105]))
+    planets = []
+    buraco = Buraco(np.array([WIDTH/2,60]))
+
+
+    print(ball.surf.get_rect())
 
     start_pos = ball.pos
 
@@ -84,6 +86,101 @@ def nivel_1(running, window):
         if ball.lifes == 0:
             window = "inicial"
             break
+
+
+        
+        if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
+            ball.pos = np.array([350,650])
+            ball.velocity = np.array([0, 0])
+            ball.lifes -=1
+            ball.launched = False
+        if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
+            ball.pos = np.array([350,650])
+            ball.lifes -= 1
+            ball.velocity = np.array([0, 0])
+            ball.launched = False
+
+
+        if buraco.acerto(ball):
+            window = "nivel_2"
+            
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_0:
+                    ball.pos[0] += 100
+            elif event.type == pygame.QUIT:
+                running = False
+                return running, False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+            # Quando o mouse é pressionado, armazena a posição inicial
+                start_pos = pygame.mouse.get_pos()
+            elif event.type == pygame.MOUSEBUTTONUP:
+                # Quando o mouse é solto, calcula a força e a velocidade e aplica na bola
+                end_pos = pygame.mouse.get_pos()
+                force_vector = [end_pos[0] - start_pos[0], end_pos[1] - start_pos[1]]
+                if force_vector == [0,0] :
+                    force_vector = [1,1]
+                force_magnitude = min(math.sqrt(force_vector[0]**2 + force_vector[1]**2), FORCE_MAX)
+                force_normalized = [force_vector[0]/force_magnitude, force_vector[1]/force_magnitude]
+                ball.velocity = [force_normalized[0]*force_magnitude/BALL_MASS*0.003*(-1), force_normalized[1]*force_magnitude/BALL_MASS*(-1)*0.003]
+                ball.launched = True
+
+        
+        # Atualiza a posição da bola de acordo com a velocidade
+        ball.pos = (ball.pos[0] + ball.velocity[0], ball.pos[1] + ball.velocity[1]) 
+        ball.rect.topleft = ball.pos
+
+        if ball.launched:
+
+            for planet in planets :
+                ball.velocity = ball.velocity + planet.atract(ball)
+                ball.pos = ball.pos + ball.velocity*0.001
+        
+
+        screen.fill((0,0,0))
+
+        
+        if pygame.mouse.get_pressed()[0]:
+            
+                
+            start_pos2 = np.array(pygame.mouse.get_pos())
+            endpos2 = ball.pos+(start_pos-start_pos2)
+            pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
+        
+        pygame.draw.circle(screen, ball.color, ball.pos, ball.radius)
+        pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
+        for planet in planets:
+            pygame.draw.circle(screen, ball.color, planet.pos, 50)
+        pygame.display.update()
+
+
+    return running, window
+
+
+
+
+
+def nivel_2(running, window):
+    ball = Ball()
+    planets = [Planet(200, np.array([WIDTH/2,HEIGHT/2]))]
+    buraco = Buraco(np.array([WIDTH/2,60]))
+
+    start_pos = ball.pos
+
+    print ("nivel 2")
+    while window == "nivel_2":
+        if ball.lifes == 0:
+            window = "inicial"
+            break
+        
+        for planet in planets :
+
+            if planet.colidiu(ball):
+                ball.pos = np.array([350,650])
+                ball.velocity = np.array([0, 0])
+                ball.lifes -=1
+                ball.launched = False
+
 
 
         if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
@@ -97,6 +194,91 @@ def nivel_1(running, window):
             ball.velocity = np.array([0, 0])
             ball.launched = False
 
+        
+        if buraco.acerto(ball):
+            window = "inicial"
+            
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_0:
+                    ball.pos[0] += 100
+            elif event.type == pygame.QUIT:
+                running = False
+                return running, False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+            # Quando o mouse é pressionado, armazena a posição inicial
+                start_pos = pygame.mouse.get_pos()
+            elif event.type == pygame.MOUSEBUTTONUP:
+                # Quando o mouse é solto, calcula a força e a velocidade e aplica na bola
+                end_pos = pygame.mouse.get_pos()
+                force_vector = [end_pos[0] - start_pos[0], end_pos[1] - start_pos[1]]
+                if force_vector == [0,0] :
+                    force_vector = [1,1]
+                force_magnitude = min(math.sqrt(force_vector[0]**2 + force_vector[1]**2), FORCE_MAX)
+                force_normalized = [force_vector[0]/force_magnitude, force_vector[1]/force_magnitude]
+                ball.velocity = [force_normalized[0]*force_magnitude/BALL_MASS*0.003*(-1), force_normalized[1]*force_magnitude/BALL_MASS*(-1)*0.003]
+                ball.launched = True
+
+        
+        # Atualiza a posição da bola de acordo com a velocidade
+        ball.pos = (ball.pos[0] + ball.velocity[0], ball.pos[1] + ball.velocity[1]) 
+        ball.rect.topleft = ball.pos
+
+        if ball.launched:
+
+            for planet in planets :
+                ball.velocity = ball.velocity + planet.atract(ball)
+                ball.pos = ball.pos + ball.velocity*0.001
+        
+
+        screen.fill((0,0,0))
+
+        
+        if pygame.mouse.get_pressed()[0]:
+            
+                
+            start_pos2 = np.array(pygame.mouse.get_pos())
+            endpos2 = ball.pos+(start_pos-start_pos2)
+            pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
+        
+        pygame.draw.circle(screen, ball.color, ball.pos, ball.radius)
+        pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
+        for planet in planets:
+            pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
+        pygame.display.update()
+
+
+    return running, window
+
+
+
+
+
+
+def nivel_3(running, window):
+    ball = Ball()
+    planets = [Planet(10, np.array([WIDTH/2,HEIGHT/2]))]
+    buraco = Buraco(np.array([WIDTH/2,60]))
+    minhoca = BuracoDeMinhoca(np.array([WIDTH,HEIGHT]), np.array([200,105]))
+
+    start_pos = ball.pos
+
+    print ("nivel 2")
+    while window == "nivel_2":
+        if ball.lifes == 0:
+            window = "inicial"
+            break
+
+        if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
+            ball.pos = np.array([350,650])
+            ball.velocity = np.array([0, 0])
+            ball.lifes -=1
+            ball.launched = False
+        if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
+            ball.pos = np.array([350,650])
+            ball.lifes -= 1
+            ball.velocity = np.array([0, 0])
+            ball.launched = False
 
         minhoca.teleport(ball)
 
@@ -125,7 +307,6 @@ def nivel_1(running, window):
                 ball.launched = True
 
         
-
         # Atualiza a posição da bola de acordo com a velocidade
         ball.pos = (ball.pos[0] + ball.velocity[0], ball.pos[1] + ball.velocity[1]) 
         ball.rect.topleft = ball.pos
@@ -140,7 +321,6 @@ def nivel_1(running, window):
         screen.fill((0,0,0))
 
         
-
         if pygame.mouse.get_pressed()[0]:
             
                 
@@ -148,20 +328,8 @@ def nivel_1(running, window):
             endpos2 = ball.pos+(start_pos-start_pos2)
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
-        
-
-            # Exibe a força aplicada na tela
-            # force_text = font.render("Força: {:.2f}".format(ball_velocity[0]*BALL_MASS), True, (255, 255, 255))
-            # screen.blit(force_text, (10, 10))
-
-            
-
-            # Atualiza a janela
-            
-            # screen.blit(ball.surf,(ball.pos[0],ball.pos[1]))
-            # Update!
         pygame.draw.circle(screen, ball.color, ball.pos, 10)
-        pygame.draw.circle(screen, ball.color, buraco.pos, 60)
+        pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
         pygame.draw.circle(screen, "blue", minhoca.entrada, 50)
         pygame.draw.circle(screen, "red", minhoca.saida, 50)
         for planet in planets:
