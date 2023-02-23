@@ -17,6 +17,8 @@ INITIAL_VELOCITY = 0.3
 screen= pygame.display.set_mode((WIDTH,HEIGHT))
 # font = pygame.font.SysFont(None, 30)
 background_inicial = pygame.image.load("images\space_golf.png")
+background_tutorial = pygame.image.load("images\load_tutorial.jpg")
+ball_jpg = pygame.image.load("images\golf_ball.png")
 
 pygame.mixer.init()
 
@@ -71,7 +73,7 @@ def inicial_screen(running, window):
 def nivel_1(running, window):
     ball = Ball()
     planets = []
-    buraco = Buraco(np.array([WIDTH/2,60]))
+    buraco = Buraco(np.array([WIDTH/2,360]))
 
 
     print(ball.surf.get_rect())
@@ -138,9 +140,9 @@ def nivel_1(running, window):
                 ball.pos = ball.pos + ball.velocity*0.001
         
 
-        screen.fill((0,0,0))
-
         
+
+        screen.blit(background_tutorial,(0,0))
         if pygame.mouse.get_pressed()[0]:
             
                 
@@ -148,14 +150,15 @@ def nivel_1(running, window):
             endpos2 = ball.pos+(start_pos-start_pos2)
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
-        pygame.draw.circle(screen, ball.color, ball.pos, ball.radius)
         pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
+        screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         for planet in planets:
             pygame.draw.circle(screen, ball.color, planet.pos, 50)
         pos_lifebar = np.array([550,830])
         for i in range(ball.lifes):
             pygame.draw.circle(screen, (200,150,200), pos_lifebar, 10)
             pos_lifebar += np.array([30,0])
+        
         pygame.display.update()
 
 
