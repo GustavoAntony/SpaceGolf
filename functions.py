@@ -27,7 +27,6 @@ def inicial_screen(running, window):
 
     screen_width = 700
     screen_height = 900
-    background_color = (255, 255, 255)
 
 
     screen = pygame.display.set_mode((screen_width, screen_height))
@@ -61,7 +60,6 @@ def inicial_screen(running, window):
                     sys.exit()
 
 
-        screen.fill(background_color)
         screen.blit(background_inicial, (0,0))
         pygame.display.update()
 
@@ -150,6 +148,10 @@ def nivel_1(running, window):
         pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
         for planet in planets:
             pygame.draw.circle(screen, ball.color, planet.pos, 50)
+        pos_lifebar = np.array([550,830])
+        for i in range(ball.lifes):
+            pygame.draw.circle(screen, (200,150,200), pos_lifebar, 10)
+            pos_lifebar += np.array([30,0])
         pygame.display.update()
 
 
@@ -165,6 +167,7 @@ def nivel_2(running, window):
     buraco = Buraco(np.array([WIDTH/2,60]))
     toque_valido = False
     start_pos = ball.pos
+
 
     print ("nivel 2")
     while window == "nivel_2":
@@ -246,7 +249,12 @@ def nivel_2(running, window):
         pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
         for planet in planets:
             pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
+        pos_lifebar = np.array([550,830])
+        for i in range(ball.lifes):
+            pygame.draw.circle(screen, (200,150,200), pos_lifebar, 10)
+            pos_lifebar += np.array([30,0])
         pygame.display.update()
+
 
 
     return running, window
