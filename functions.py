@@ -162,7 +162,7 @@ def nivel_1(running, window):
 
 def nivel_2(running, window):
     ball = Ball()
-    planets = [Planet(200, np.array([WIDTH/2,HEIGHT/2]))]
+    planets = [Planet(100, np.array([WIDTH/2,HEIGHT/2]))]
     buraco = Buraco(np.array([WIDTH/2,60]))
 
     start_pos = ball.pos
@@ -196,7 +196,7 @@ def nivel_2(running, window):
 
         
         if buraco.acerto(ball):
-            window = "inicial"
+            window = "nivel_3"
             
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -257,18 +257,29 @@ def nivel_2(running, window):
 
 def nivel_3(running, window):
     ball = Ball()
-    planets = [Planet(10, np.array([WIDTH/2,HEIGHT/2]))]
+    planets = [Planet(300, np.array([WIDTH/2,HEIGHT/2]))]
     buraco = Buraco(np.array([WIDTH/2,60]))
-    minhoca = BuracoDeMinhoca(np.array([WIDTH,HEIGHT]), np.array([200,105]))
+    minhoca = BuracoDeMinhoca(np.array([ball.pos[0]+100,ball.pos[1]]), np.array([200,60]))
 
     start_pos = ball.pos
 
-    print ("nivel 2")
-    while window == "nivel_2":
+    print ("nivel 3")
+    while window == "nivel_3":
         if ball.lifes == 0:
             window = "inicial"
             break
 
+
+
+        for planet in planets :
+
+            if planet.colidiu(ball):
+                ball.pos = np.array([350,650])
+                ball.velocity = np.array([0, 0])
+                ball.lifes -=1
+                ball.launched = False
+
+                
         if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
@@ -328,12 +339,12 @@ def nivel_3(running, window):
             endpos2 = ball.pos+(start_pos-start_pos2)
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
-        pygame.draw.circle(screen, ball.color, ball.pos, 10)
+        pygame.draw.circle(screen, ball.color, ball.pos, ball.radius)
         pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
-        pygame.draw.circle(screen, "blue", minhoca.entrada, 50)
-        pygame.draw.circle(screen, "red", minhoca.saida, 50)
+        pygame.draw.circle(screen, "blue", minhoca.entrada, minhoca.radius)
+        pygame.draw.circle(screen, "red", minhoca.saida, minhoca.radius)
         for planet in planets:
-            pygame.draw.circle(screen, ball.color, planet.pos, 50)
+            pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
         pygame.display.update()
 
 

@@ -1,5 +1,6 @@
 import pygame 
 import numpy as np
+import math
 
 
 class Buraco(pygame.sprite.Sprite):
@@ -13,7 +14,15 @@ class Buraco(pygame.sprite.Sprite):
 
     def acerto(self, ball):
 
-        if  self.rect.colliderect(ball.rect):
+        x1 = self.pos[0]
+        x2 = ball.pos[0]
+        y1 = self.pos[1]
+        y2 = ball.pos[1]
+
+
+        distancia = math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
+
+        if distancia <= (self.radius+ball.radius):
             return True
         else :
             return False
