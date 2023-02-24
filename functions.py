@@ -19,6 +19,7 @@ screen= pygame.display.set_mode((WIDTH,HEIGHT))
 # font = pygame.font.SysFont(None, 30)
 background_inicial = pygame.image.load("images\space_golf.png")
 background_tutorial = pygame.image.load("images\load_tutorial.jpg")
+levels_background = pygame.image.load("images\levels_background.jpg")
 ball_jpg = pygame.image.load("images\golf_ball.png")
 
 pygame.mixer.init()
@@ -248,7 +249,7 @@ def nivel_2(running, window):
                 ball.pos = ball.pos + ball.velocity*0.001
         
 
-        screen.blit(background_inicial, (0,0))
+        screen.blit(levels_background, (0,0))
         
 
         
@@ -358,7 +359,7 @@ def nivel_3(running, window):
                 ball.pos = ball.pos + ball.velocity*0.001
         
 
-        screen.blit(background_inicial, (0,0))
+        screen.blit(levels_background, (0,0))
         
 
         
@@ -469,7 +470,7 @@ def nivel_4(running, window):
                 ball.pos = ball.pos + ball.velocity*0.001
         
 
-        screen.blit(background_inicial, (0,0))
+        screen.blit(levels_background, (0,0))
         
 
         
