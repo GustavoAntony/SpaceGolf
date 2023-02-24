@@ -62,11 +62,9 @@ def inicial_screen(running, window):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_KP_ENTER or event.key == pygame.K_RETURN:
-                    print("Botão Start clicado!")
                     window = "nivel_2"
             
             if event.type == pygame.MOUSEBUTTONDOWN:
-                print(pygame.mouse.get_pos())
                 if start_button.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
                     window ="nivel_2"
                 elif tutorial_button.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
@@ -88,11 +86,9 @@ def nivel_1(running, window):
     buraco = Buraco(np.array([WIDTH/2,360]))
     back_button = pygame.Rect(40,789,200,63)
 
-    print(ball.surf.get_rect())
     toque_valido = False
     start_pos = ball.pos
 
-    print ("nivel 1")
     while window == "nivel_1":
         if ball.lifes == 0:
             window = "gameover"
@@ -197,7 +193,6 @@ def nivel_2(running, window):
     start_pos = ball.pos
 
 
-    print ("nivel 2")
     while window == "nivel_2":
         if ball.lifes == 0:
             window = "gameover"
@@ -254,6 +249,7 @@ def nivel_2(running, window):
                 force_normalized = [force_vector[0]/force_magnitude, force_vector[1]/force_magnitude]
                 ball.velocity = [force_normalized[0]*force_magnitude/BALL_MASS*0.003*(-1), force_normalized[1]*force_magnitude/BALL_MASS*(-1)*0.003]
                 ball.launched = True
+                ball.lifes -= 1
             elif event.type == pygame.MOUSEBUTTONUP:
                 toque_valido = True
 
@@ -287,7 +283,7 @@ def nivel_2(running, window):
             screen.blit(planet.image,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
 
         pos_lifebar = np.array([550,830])
-        for i in range(ball.lifes):
+        for i in range(ball.lifes-1):
             screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
             pos_lifebar += np.array([30,0])
         pygame.display.update()
@@ -309,7 +305,6 @@ def nivel_3(running, window):
 
     start_pos = ball.pos
 
-    print ("nivel 3")
     while window == "nivel_3":
         if ball.lifes == 0:
             window = "gameover"
@@ -369,6 +364,7 @@ def nivel_3(running, window):
                 force_normalized = [force_vector[0]/force_magnitude, force_vector[1]/force_magnitude]
                 ball.velocity = [force_normalized[0]*force_magnitude/BALL_MASS*0.003*(-1), force_normalized[1]*force_magnitude/BALL_MASS*(-1)*0.003]
                 ball.launched = True
+                ball.lifes -= 1
 
         
         # Atualiza a posição da bola de acordo com a velocidade
@@ -400,7 +396,7 @@ def nivel_3(running, window):
         for planet in planets:
             screen.blit(planet.image,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
         pos_lifebar = np.array([550,830])
-        for i in range(ball.lifes):
+        for i in range(ball.lifes-1):
             screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
             pos_lifebar += np.array([30,0])
         pygame.display.update()
@@ -422,7 +418,6 @@ def nivel_4(running, window):
 
     start_pos = ball.pos
 
-    print ("nivel 4")
     while window == "nivel_4":
         if ball.lifes == 0:
             window = "gameover"
@@ -481,6 +476,7 @@ def nivel_4(running, window):
                 force_normalized = [force_vector[0]/force_magnitude, force_vector[1]/force_magnitude]
                 ball.velocity = [force_normalized[0]*force_magnitude/BALL_MASS*0.003*(-1), force_normalized[1]*force_magnitude/BALL_MASS*(-1)*0.003]
                 ball.launched = True
+                ball.lifes -= 1
 
         
         # Atualiza a posição da bola de acordo com a velocidade
@@ -513,7 +509,7 @@ def nivel_4(running, window):
         for planet in planets:
             screen.blit(planet.image,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
         pos_lifebar = np.array([550,830])
-        for i in range(ball.lifes):
+        for i in range(ball.lifes-1):
             screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
             pos_lifebar += np.array([30,0])
         pygame.display.update()

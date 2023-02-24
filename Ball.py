@@ -13,7 +13,7 @@ class Ball(pygame.sprite.Sprite):
         self.color = (255, 255, 0)
         self.mass = 10
         self.launched = False
-        self.lifes = 3
+        self.lifes = 4
         self.radius = (self.surf.get_rect()[2])/2
 
     def pos_u (self):
