@@ -46,7 +46,7 @@ onde:
 - m1 e m2 são as massas dos dois corpos;
 - r é a distância entre os dois corpos.
 
-No código ela está na classe Planet no método atract() que recebe um objeto como argumeto : 
+No código ela está na classe Planet e no método atract() que recebe um objeto como argumeto : 
 
 ``` 
 
