@@ -9,3 +9,17 @@ Modelo físico:
 Regras do Jogo:
 
 Gif:
+
+# Nome do Projeto
+
+Uma breve descrição do projeto.
+
+## Instalação
+
+1. Clone o repositório.
+2. Execute `npm install` para instalar as dependências.
+
+## Uso
+
+Uma descrição mais detalhada de como usar o projeto, com exemplos de código.
+
