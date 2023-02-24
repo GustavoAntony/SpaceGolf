@@ -1,6 +1,6 @@
 # SPACE GOLF  
 
-## Descrição do jogo e objetivo:
+## Descrição do jogo:
 
 O jogo mimetiza uma partida de Golf no espaço.
 
