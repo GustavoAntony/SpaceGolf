@@ -80,7 +80,7 @@ def nivel_1(running, window):
     ball = Ball()
     planets = []
     buraco = Buraco(np.array([WIDTH/2,360]))
-
+    back_button = pygame.Rect(40,789,200,63)
 
     print(ball.surf.get_rect())
     toque_valido = False
@@ -110,7 +110,7 @@ def nivel_1(running, window):
 
         if buraco.acerto(ball):
             coin_sound.play()
-            window = "inicial"
+            window = "nivel_2"
             
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -122,6 +122,7 @@ def nivel_1(running, window):
             elif event.type == pygame.MOUSEBUTTONDOWN:
             # Quando o mouse é pressionado, armazena a posição inicial
                 start_pos = pygame.mouse.get_pos()
+                print(start_pos)
             elif event.type == pygame.MOUSEBUTTONUP and toque_valido == True:
                 # Quando o mouse é solto, calcula a força e a velocidade e aplica na bola
                 end_pos = pygame.mouse.get_pos()
@@ -134,6 +135,10 @@ def nivel_1(running, window):
                 ball.launched = True
             elif event.type == pygame.MOUSEBUTTONUP:
                 toque_valido = True
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if back_button.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
+                    window ="inicial"
+                    break
 
         
         # Atualiza a posição da bola de acordo com a velocidade
