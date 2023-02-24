@@ -33,5 +33,9 @@ while running:
         running,window = nivel_3(running,window)
     elif window == "nivel_4":
         running,window = nivel_4(running,window)
+    elif window == "gameover":
+        running,window = game_over(running,window)
+    elif window == "winner":
+        running,window = winner(running,window)
     # Update!
 
