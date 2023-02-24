@@ -97,12 +97,10 @@ def nivel_1(running, window):
         if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
-            ball.lifes -=1
             ball.launched = False
             batida.play()
         if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
             ball.pos = np.array([350,650])
-            ball.lifes -= 1
             ball.velocity = np.array([0, 0])
             ball.launched = False
             batida.play()
@@ -136,6 +134,7 @@ def nivel_1(running, window):
                 force_normalized = [force_vector[0]/force_magnitude, force_vector[1]/force_magnitude]
                 ball.velocity = [force_normalized[0]*force_magnitude/BALL_MASS*0.003*(-1), force_normalized[1]*force_magnitude/BALL_MASS*(-1)*0.003]
                 ball.launched = True
+                ball.lifes -= 1
             elif event.type == pygame.MOUSEBUTTONUP:
                 toque_valido = True
 
@@ -170,7 +169,7 @@ def nivel_1(running, window):
             screen.blit(small_planet,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
 
         pos_lifebar = np.array([550,830])
-        for i in range(ball.lifes):
+        for i in range(ball.lifes-1):
             screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
             pos_lifebar += np.array([30,0])
         
@@ -201,7 +200,6 @@ def nivel_2(running, window):
             if planet.colidiu(ball):
                 ball.pos = np.array([350,650])
                 ball.velocity = np.array([0, 0])
-                ball.lifes -=1
                 ball.launched = False
                 batida.play()
 
@@ -210,13 +208,11 @@ def nivel_2(running, window):
         if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
-            ball.lifes -=1
             ball.launched = False
             batida.play()
 
         if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
             ball.pos = np.array([350,650])
-            ball.lifes -= 1
             ball.velocity = np.array([0, 0])
             ball.launched = False
             batida.play()
@@ -315,7 +311,6 @@ def nivel_3(running, window):
             if planet.colidiu(ball):
                 ball.pos = np.array([350,650])
                 ball.velocity = np.array([0, 0])
-                ball.lifes -=1
                 ball.launched = False
                 batida.play()
 
@@ -324,13 +319,11 @@ def nivel_3(running, window):
         if ball.pos[0]> WIDTH-20 or ball.pos[0] < 20:
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
-            ball.lifes -=1
             ball.launched = False
             batida.play()
 
         if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
             ball.pos = np.array([350,650])
-            ball.lifes -= 1
             ball.velocity = np.array([0, 0])
             ball.launched = False
             batida.play()
@@ -428,7 +421,6 @@ def nivel_4(running, window):
             if planet.colidiu(ball):
                 ball.pos = np.array([350,650])
                 ball.velocity = np.array([0, 0])
-                ball.lifes -=1
                 ball.launched = False
                 batida.play()
 
@@ -437,13 +429,11 @@ def nivel_4(running, window):
         if ball.pos[0]> WIDTH-ball.radius or ball.pos[0] < ball.radius:
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
-            ball.lifes -=1
             ball.launched = False
             batida.play()
 
         if ball.pos[1]> HEIGHT-ball.radius or ball.pos[1] < ball.radius :
             ball.pos = np.array([350,650])
-            ball.lifes -= 1
             ball.velocity = np.array([0, 0])
             ball.launched = False
             batida.play()
