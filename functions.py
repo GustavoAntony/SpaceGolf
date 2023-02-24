@@ -100,11 +100,15 @@ def nivel_1(running, window):
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            if ball.lifes ==1 :
+                ball.lifes = 0
             batida.play()
         if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            if ball.lifes ==1 :
+                ball.lifes = 0
             batida.play()
 
 
@@ -203,6 +207,8 @@ def nivel_2(running, window):
                 ball.pos = np.array([350,650])
                 ball.velocity = np.array([0, 0])
                 ball.launched = False
+                if ball.lifes ==1 :
+                    ball.lifes = 0
                 batida.play()
 
 
@@ -211,12 +217,16 @@ def nivel_2(running, window):
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            if ball.lifes ==1 :
+                ball.lifes = 0
             batida.play()
 
         if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            if ball.lifes ==1 :
+                ball.lifes = 0
             batida.play()
 
 
@@ -314,6 +324,8 @@ def nivel_3(running, window):
                 ball.pos = np.array([350,650])
                 ball.velocity = np.array([0, 0])
                 ball.launched = False
+                if ball.lifes ==1 :
+                    ball.lifes = 0
                 batida.play()
 
 
@@ -322,12 +334,16 @@ def nivel_3(running, window):
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            if ball.lifes ==1 :
+                ball.lifes = 0
             batida.play()
 
         if ball.pos[1]> HEIGHT-20 or ball.pos[1] < 20 :
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            if ball.lifes ==1 :
+                ball.lifes = 0
             batida.play()
 
 
@@ -424,6 +440,8 @@ def nivel_4(running, window):
                 ball.pos = np.array([350,650])
                 ball.velocity = np.array([0, 0])
                 ball.launched = False
+                if ball.lifes ==1 :
+                    ball.lifes = 0
                 batida.play()
 
 
@@ -432,12 +450,16 @@ def nivel_4(running, window):
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            if ball.lifes ==1 :
+                ball.lifes = 0
             batida.play()
 
         if ball.pos[1]> HEIGHT-ball.radius or ball.pos[1] < ball.radius :
             ball.pos = np.array([350,650])
             ball.velocity = np.array([0, 0])
             ball.launched = False
+            if ball.lifes ==1 :
+                ball.lifes = 0
             batida.play()
 
 
