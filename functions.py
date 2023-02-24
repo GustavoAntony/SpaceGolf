@@ -24,7 +24,9 @@ ball_jpg = pygame.image.load("images\golf_ball.png")
 
 pygame.mixer.init()
 
+coin_sound = pygame.mixer.Sound("music/success-fanfare-trumpets-6185.wav")
 batida = pygame.mixer.Sound("music/hurt_c_08-102842.mp3")
+# Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=98269">Pixabay</a>
 #TELA INICIAL
 def inicial_screen(running, window):
     window = 'inicial'
@@ -105,6 +107,7 @@ def nivel_1(running, window):
 
 
         if buraco.acerto(ball):
+            coin_sound.play()
             window = "inicial"
             
         for event in pygame.event.get():
@@ -213,6 +216,7 @@ def nivel_2(running, window):
 
         
         if buraco.acerto(ball):
+            coin_sound.play()
             window = "nivel_3"
             
         for event in pygame.event.get():
@@ -325,6 +329,7 @@ def nivel_3(running, window):
         minhoca.teleport(ball)
 
         if buraco.acerto(ball):
+            coin_sound.play()
             window = "nivel_4"
             
         for event in pygame.event.get():
@@ -436,6 +441,7 @@ def nivel_4(running, window):
 
 
         if buraco.acerto(ball):
+            coin_sound.play()
             window = "inicial"
             
         for event in pygame.event.get():
