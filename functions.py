@@ -156,8 +156,9 @@ def nivel_1(running, window):
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         for planet in planets:
             pygame.draw.circle(screen, ball.color, planet.pos, 50)
+        pos_lifebar = np.array([550,830])
         for i in range(ball.lifes):
-            pos_lifebar = np.array([550,830])
+
             screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
             pos_lifebar += np.array([30,0])
         
