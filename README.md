@@ -27,7 +27,7 @@ O jogo simula uma partida de Golf no espaço.
 
 ## Gif:
 
-Uma descrição mais detalhada de como usar o projeto, com exemplos de código.
+![SpaceGolf (1)](https://user-images.githubusercontent.com/105286051/221239305-2d98632d-d831-4ca3-8a60-be569099dd14.gif)
 
 ## Video com Som do jogo:
 
