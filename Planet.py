@@ -4,7 +4,7 @@ import numpy as np
 import math
 
 class Planet(pygame.sprite.Sprite):
-    def __init__(self, mass, pos):
+    def __init__(self, mass, pos, image):
         super(Planet, self).__init__()
         self.surf = pygame.Surface((mass, mass))
         self.rect = self.surf.get_rect()
@@ -12,6 +12,7 @@ class Planet(pygame.sprite.Sprite):
         self.rect.topleft = [self.pos[0]-(mass/2),self.pos[1]-(mass/2)]
         self.radius = (self.surf.get_rect()[2])/2
         self.mass = mass
+        self.image = image
 
     def atract(self, other):
 

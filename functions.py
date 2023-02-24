@@ -21,6 +21,8 @@ background_inicial = pygame.image.load("images\space_golf.png")
 background_tutorial = pygame.image.load("images\load_tutorial.jpg")
 levels_background = pygame.image.load("images\levels_background.jpg")
 ball_jpg = pygame.image.load("images\golf_ball.png")
+small_planet = pygame.image.load("images/small_planet.png")
+big_planet = pygame.image.load("images/big_planet.png")
 
 pygame.mixer.init()
 
@@ -158,10 +160,10 @@ def nivel_1(running, window):
         pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         for planet in planets:
-            pygame.draw.circle(screen, ball.color, planet.pos, 50)
+            screen.blit(small_planet,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
+
         pos_lifebar = np.array([550,830])
         for i in range(ball.lifes):
-
             screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
             pos_lifebar += np.array([30,0])
         
@@ -176,7 +178,7 @@ def nivel_1(running, window):
 
 def nivel_2(running, window):
     ball = Ball()
-    planets = [Planet(100, np.array([WIDTH/2,HEIGHT/2]))]
+    planets = [Planet(100, np.array([WIDTH/2,HEIGHT/2]), small_planet)]
     buraco = Buraco(np.array([WIDTH/2,60]))
     toque_valido = False
     start_pos = ball.pos
@@ -268,7 +270,9 @@ def nivel_2(running, window):
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
         for planet in planets:
-            pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
+            # pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
+            screen.blit(planet.image,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
+
         pos_lifebar = np.array([550,830])
         for i in range(ball.lifes):
             screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
@@ -286,7 +290,7 @@ def nivel_2(running, window):
 
 def nivel_3(running, window):
     ball = Ball()
-    planets = [Planet(300, np.array([WIDTH/2,HEIGHT/2]))]
+    planets = [Planet(300, np.array([WIDTH/2,HEIGHT/2]),big_planet)]
     buraco = Buraco(np.array([WIDTH/2,60]))
     minhoca = BuracoDeMinhoca(np.array([ball.pos[0]+100,ball.pos[1]]), np.array([200,60]))
 
@@ -381,7 +385,7 @@ def nivel_3(running, window):
         pygame.draw.circle(screen, "blue", minhoca.entrada, minhoca.radius)
         pygame.draw.circle(screen, "red", minhoca.saida, minhoca.radius)
         for planet in planets:
-            pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
+            screen.blit(planet.image,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
         pos_lifebar = np.array([550,830])
         for i in range(ball.lifes):
             screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
@@ -400,7 +404,7 @@ def nivel_3(running, window):
 
 def nivel_4(running, window):
     ball = Ball()
-    planets = [Planet(222, np.array([181,520])),Planet(206, np.array([512,324]))]
+    planets = [Planet(222, np.array([181,520]),small_planet),Planet(206, np.array([512,324]),small_planet)]
     buraco = Buraco(np.array([586,115]))
 
     start_pos = ball.pos
@@ -491,7 +495,7 @@ def nivel_4(running, window):
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
         for planet in planets:
-            pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
+            screen.blit(planet.image,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
         pos_lifebar = np.array([550,830])
         for i in range(ball.lifes):
             screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
