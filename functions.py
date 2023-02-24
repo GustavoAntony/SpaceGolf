@@ -23,6 +23,10 @@ levels_background = pygame.image.load("images\levels_background.jpg")
 ball_jpg = pygame.image.load("images\golf_ball.png")
 small_planet = pygame.image.load("images/small_planet.png")
 big_planet = pygame.image.load("images/big_planet.png")
+terra = pygame.image.load("images/terra.png")
+venus = pygame.image.load("images/venus.png")
+flag = pygame.image.load("images/flag.png")
+wormhole = pygame.image.load("images/wormhole.png")
 
 pygame.mixer.init()
 
@@ -162,7 +166,9 @@ def nivel_1(running, window):
             endpos2 = ball.pos+(start_pos-start_pos2)
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
-        pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
+        
+        screen.blit(flag,buraco.pos+np.array([-(buraco.radius),-(buraco.radius)]))
+
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         for planet in planets:
             screen.blit(small_planet,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
@@ -273,7 +279,7 @@ def nivel_2(running, window):
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
-        pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
+        screen.blit(flag,buraco.pos+np.array([-(buraco.radius),-(buraco.radius)]))
         for planet in planets:
             # pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
             screen.blit(planet.image,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
@@ -386,9 +392,9 @@ def nivel_3(running, window):
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
-        pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
-        pygame.draw.circle(screen, "blue", minhoca.entrada, minhoca.radius)
-        pygame.draw.circle(screen, "red", minhoca.saida, minhoca.radius)
+        screen.blit(flag,buraco.pos+np.array([-(buraco.radius),-(buraco.radius)]))
+        screen.blit(wormhole,minhoca.entrada+np.array([-(minhoca.radius),-(minhoca.radius)]))
+        screen.blit(wormhole,minhoca.saida+np.array([-(minhoca.radius),-(minhoca.radius)]))
         for planet in planets:
             screen.blit(planet.image,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
         pos_lifebar = np.array([550,830])
@@ -409,7 +415,7 @@ def nivel_3(running, window):
 
 def nivel_4(running, window):
     ball = Ball()
-    planets = [Planet(222, np.array([181,520]),small_planet),Planet(206, np.array([512,324]),small_planet)]
+    planets = [Planet(222, np.array([181,520]),terra),Planet(206, np.array([512,324]),venus)]
     buraco = Buraco(np.array([586,115]))
 
     start_pos = ball.pos
@@ -498,7 +504,10 @@ def nivel_4(running, window):
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
-        pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
+
+
+        screen.blit(flag,buraco.pos+np.array([-(buraco.radius),-(buraco.radius)]))
+
         for planet in planets:
             screen.blit(planet.image,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
         pos_lifebar = np.array([550,830])
