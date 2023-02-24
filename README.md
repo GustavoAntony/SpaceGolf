@@ -6,7 +6,7 @@ O jogo mimetiza uma partida de Golf no espaço.
 
 ## Regras do Jogo:
 
-**Objetivo**: Acertar a bolinha na bandeira.
+**Objetivo**: Acertar a bola de golf na bandeira.
 
 **Lançamento**: O lançamento é resultado de um vetor que é criado a partir da distância entre o ponto do clique e o ponto onde o clique é solto. Esse vetor é invertido e representado como uma reta dentro do jogo.
 
