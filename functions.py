@@ -26,7 +26,9 @@ big_planet = pygame.image.load("images/big_planet.png")
 terra = pygame.image.load("images/terra.png")
 venus = pygame.image.load("images/venus.png")
 flag = pygame.image.load("images/flag.png")
-wormhole = pygame.image.load("images/wormhole.png")
+wormhole = pygame.image.load("images\wormhole.png")
+game_over_jpg = pygame.image.load("images\gameover.jpg")
+winner_jpg = pygame.image.load("images/winner.jpg")
 
 pygame.mixer.init()
 
@@ -89,7 +91,7 @@ def nivel_1(running, window):
 
     while window == "nivel_1":
         if ball.lifes == 0:
-            window = "inicial"
+            window = "gameover"
             break
 
 
@@ -192,7 +194,7 @@ def nivel_2(running, window):
 
     while window == "nivel_2":
         if ball.lifes == 0:
-            window = "inicial"
+            window = "gameover"
             break
         
         for planet in planets :
@@ -301,7 +303,7 @@ def nivel_3(running, window):
 
     while window == "nivel_3":
         if ball.lifes == 0:
-            window = "inicial"
+            window = "gameover"
             break
 
 
@@ -411,7 +413,7 @@ def nivel_4(running, window):
 
     while window == "nivel_4":
         if ball.lifes == 0:
-            window = "inicial"
+            window = "gameover"
             break
 
 
@@ -442,7 +444,7 @@ def nivel_4(running, window):
 
         if buraco.acerto(ball):
             coin_sound.play()
-            window = "inicial"
+            window = "winner"
             
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -504,3 +506,35 @@ def nivel_4(running, window):
 
 
     return running, window
+
+def game_over(running, window):
+    rect_exit = pygame.Rect(229,625,259,84)
+    rect_restart = pygame.Rect(182,457,351,116)
+    while window == "gameover":
+        screen.blit(game_over_jpg, (0,0))
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if rect_exit.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
+                    return False,False
+                if rect_restart.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
+                    window ="nivel_2"
+            elif event.type == pygame.QUIT:
+                return False, False
+        pygame.display.update()
+    return running,window
+
+def winner(running, window):
+    rect_exit = pygame.Rect(229,625,259,84)
+    rect_restart = pygame.Rect(182,457,351,116)
+    while window == "winner":
+        screen.blit(winner_jpg, (0,0))
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if rect_exit.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
+                    return False,False
+                if rect_restart.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
+                    window ="nivel_2"
+            elif event.type == pygame.QUIT:
+                return False, False
+        pygame.display.update()
+    return running,window
