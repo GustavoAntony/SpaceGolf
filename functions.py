@@ -126,6 +126,9 @@ def nivel_1(running, window):
             elif event.type == pygame.MOUSEBUTTONDOWN:
             # Quando o mouse é pressionado, armazena a posição inicial
                 start_pos = pygame.mouse.get_pos()
+                if back_button.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
+                    window ="inicial"
+                    break
                 print(start_pos)
             elif event.type == pygame.MOUSEBUTTONUP and toque_valido == True:
                 # Quando o mouse é solto, calcula a força e a velocidade e aplica na bola
@@ -139,10 +142,7 @@ def nivel_1(running, window):
                 ball.launched = True
             elif event.type == pygame.MOUSEBUTTONUP:
                 toque_valido = True
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if back_button.colliderect(pygame.Rect(pygame.mouse.get_pos(),(1,1))):
-                    window ="inicial"
-                    break
+
 
         
         # Atualiza a posição da bola de acordo com a velocidade
