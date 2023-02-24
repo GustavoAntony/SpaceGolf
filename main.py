@@ -3,8 +3,6 @@ from functions import *
 
 pygame.init()
 pygame.mixer.init()
-# font = pygame.font.SysFont(None, 30)
-
 
 
 running = True
@@ -19,9 +17,6 @@ pygame.mixer.music.play(loops=-1)
 
 window = "inicial"
 while running:
-
-
-
     
     # Veirfica a tela que o usuário está para fazer a mudança de tela
     if window == "inicial":
@@ -38,6 +33,4 @@ while running:
         running,window = game_over(running,window)
     elif window == "winner":
         running,window = winner(running,window)
-   
-    # Update!
 
