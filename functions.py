@@ -5,7 +5,6 @@ from Buraco import Buraco
 from BuracoDeMinhoca import BuracoDeMinhoca
 import math
 import numpy as np
-import pygame
 import sys
 HEIGHT = 900
 WIDTH = 700
@@ -69,7 +68,7 @@ def inicial_screen(running, window):
 
 
 
-            # Captura evento de telca para baixo
+            # Captura evento de tecla para baixo
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_KP_ENTER or event.key == pygame.K_RETURN:
                     window = "nivel_2"
@@ -181,13 +180,12 @@ def nivel_1(running, window):
         # Pinta fundo
         screen.blit(background_tutorial,(0,0))
         if pygame.mouse.get_pressed()[0]:
-            
-                
+            #desenha a linha que representa o vetor no qual será lançada a bolinha
             start_pos2 = np.array(pygame.mouse.get_pos())
             endpos2 = ball.pos+(start_pos-start_pos2)
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
-        
+        #adiciona os elementos da tela (bola, bandeira, planetas e vidas)
         screen.blit(flag,buraco.pos+np.array([-(buraco.radius),-(buraco.radius)]))
 
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
@@ -304,16 +302,16 @@ def nivel_2(running, window):
 
         
         if pygame.mouse.get_pressed()[0]:
-            
-                
+            #desenha a linha que representa o vetor no qual será lançada a bolinha
             start_pos2 = np.array(pygame.mouse.get_pos())
             endpos2 = ball.pos+(start_pos-start_pos2)
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
+        #adiciona os elementos da tela (bola, bandeira, planetas e vidas)
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         screen.blit(flag,buraco.pos+np.array([-(buraco.radius),-(buraco.radius)]))
         for planet in planets:
-            # pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
+
             screen.blit(planet.image,planet.pos+np.array([-(planet.radius),-(planet.radius)]))
 
         pos_lifebar = np.array([550,830])
@@ -430,12 +428,12 @@ def nivel_3(running, window):
 
         
         if pygame.mouse.get_pressed()[0]:
-            
-                
+            #desenha a linha que representa o vetor no qual será lançada a bolinha
             start_pos2 = np.array(pygame.mouse.get_pos())
             endpos2 = ball.pos+(start_pos-start_pos2)
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
+        #adiciona os elementos da tela (bola, bandeira, planetas e vidas)
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         screen.blit(flag,buraco.pos+np.array([-(buraco.radius),-(buraco.radius)]))
         screen.blit(wormhole,minhoca.entrada+np.array([-(minhoca.radius),-(minhoca.radius)]))
@@ -546,15 +544,13 @@ def nivel_4(running, window):
 
         
         if pygame.mouse.get_pressed()[0]:
-            
-                
+            #desenha a linha que representa o vetor no qual será lançada a bolinha   
             start_pos2 = np.array(pygame.mouse.get_pos())
             endpos2 = ball.pos+(start_pos-start_pos2)
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
+        #adiciona os elementos da tela (bola, bandeira, planetas e vidas)
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
-
-
         screen.blit(flag,buraco.pos+np.array([-(buraco.radius),-(buraco.radius)]))
 
         for planet in planets:
