@@ -14,6 +14,7 @@ FORCE_MAX = 10.0
 BALL_MASS = 1.0
 INITIAL_VELOCITY = 0.3
 
+
 screen= pygame.display.set_mode((WIDTH,HEIGHT))
 # font = pygame.font.SysFont(None, 30)
 background_inicial = pygame.image.load("images\space_golf.png")
@@ -154,9 +155,9 @@ def nivel_1(running, window):
         screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         for planet in planets:
             pygame.draw.circle(screen, ball.color, planet.pos, 50)
-        pos_lifebar = np.array([550,830])
         for i in range(ball.lifes):
-            pygame.draw.circle(screen, (200,150,200), pos_lifebar, 10)
+            pos_lifebar = np.array([550,830])
+            screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
             pos_lifebar += np.array([30,0])
         
         pygame.display.update()
@@ -247,7 +248,8 @@ def nivel_2(running, window):
                 ball.pos = ball.pos + ball.velocity*0.001
         
 
-        screen.fill((0,0,0))
+        screen.blit(background_inicial, (0,0))
+        
 
         
         if pygame.mouse.get_pressed()[0]:
@@ -257,13 +259,13 @@ def nivel_2(running, window):
             endpos2 = ball.pos+(start_pos-start_pos2)
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
-        pygame.draw.circle(screen, ball.color, ball.pos, ball.radius)
+        screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
         for planet in planets:
             pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
         pos_lifebar = np.array([550,830])
         for i in range(ball.lifes):
-            pygame.draw.circle(screen, (200,150,200), pos_lifebar, 10)
+            screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
             pos_lifebar += np.array([30,0])
         pygame.display.update()
 
@@ -356,7 +358,8 @@ def nivel_3(running, window):
                 ball.pos = ball.pos + ball.velocity*0.001
         
 
-        screen.fill((0,0,0))
+        screen.blit(background_inicial, (0,0))
+        
 
         
         if pygame.mouse.get_pressed()[0]:
@@ -366,13 +369,18 @@ def nivel_3(running, window):
             endpos2 = ball.pos+(start_pos-start_pos2)
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
-        pygame.draw.circle(screen, ball.color, ball.pos, ball.radius)
+        screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
         pygame.draw.circle(screen, "blue", minhoca.entrada, minhoca.radius)
         pygame.draw.circle(screen, "red", minhoca.saida, minhoca.radius)
         for planet in planets:
             pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
+        pos_lifebar = np.array([550,830])
+        for i in range(ball.lifes):
+            screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
+            pos_lifebar += np.array([30,0])
         pygame.display.update()
+
 
 
     return running, window
@@ -461,7 +469,8 @@ def nivel_4(running, window):
                 ball.pos = ball.pos + ball.velocity*0.001
         
 
-        screen.fill((0,0,0))
+        screen.blit(background_inicial, (0,0))
+        
 
         
         if pygame.mouse.get_pressed()[0]:
@@ -471,10 +480,14 @@ def nivel_4(running, window):
             endpos2 = ball.pos+(start_pos-start_pos2)
             pygame.draw.line(surface= screen, color='white', start_pos= (ball.pos),end_pos=endpos2)
         
-        pygame.draw.circle(screen, ball.color, ball.pos, ball.radius)
+        screen.blit(ball_jpg,ball.pos+np.array([-(ball.radius),-(ball.radius)]))
         pygame.draw.circle(screen, ball.color, buraco.pos, buraco.radius)
         for planet in planets:
             pygame.draw.circle(screen, ball.color, planet.pos, planet.radius)
+        pos_lifebar = np.array([550,830])
+        for i in range(ball.lifes):
+            screen.blit(ball_jpg,pos_lifebar+np.array([-(ball.radius),-(ball.radius)]))
+            pos_lifebar += np.array([30,0])
         pygame.display.update()
 
 
