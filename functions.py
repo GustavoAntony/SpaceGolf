@@ -5,7 +5,6 @@ from Buraco import Buraco
 from BuracoDeMinhoca import BuracoDeMinhoca
 import math
 import numpy as np
-from Button import Button
 import pygame
 import sys
 HEIGHT = 900
