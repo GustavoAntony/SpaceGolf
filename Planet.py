@@ -23,14 +23,14 @@ class Planet(pygame.sprite.Sprite):
         distance = np.linalg.norm(direction)
 
 
-        modulo = direction/distance
+        norm = direction/distance
 
         if distance == 0 :
             magnitute = C/1
         else :
             magnitute = C/distance**2
 
-        force = modulo * magnitute
+        force = norm * magnitute
         
 
         return force

@@ -171,7 +171,7 @@ def nivel_1(running, window):
         ball.rect.topleft = ball.pos
 
         if ball.launched:
-
+            # Altera a velocidade pela atração gravitacional
             for planet in planets :
                 ball.velocity = ball.velocity + planet.atract(ball)
                 ball.pos = ball.pos + ball.velocity*0.001
@@ -293,7 +293,7 @@ def nivel_2(running, window):
         ball.rect.topleft = ball.pos
 
         if ball.launched:
-
+            # Altera a velocidade pela atração gravitacional
             for planet in planets :
                 ball.velocity = ball.velocity + planet.atract(ball)
                 ball.pos = ball.pos + ball.velocity*0.001
@@ -418,6 +418,8 @@ def nivel_3(running, window):
 
         if ball.launched:
 
+
+            # Altera a velocidade pela atração gravitacional
             for planet in planets :
                 ball.velocity = ball.velocity + planet.atract(ball)
                 ball.pos = ball.pos + ball.velocity*0.001
@@ -533,7 +535,7 @@ def nivel_4(running, window):
         ball.rect.topleft = ball.pos
 
         if ball.launched:
-
+            # Altera a velocidade pela atração gravitacional
             for planet in planets :
                 ball.velocity = ball.velocity + planet.atract(ball)
                 ball.pos = ball.pos + ball.velocity*0.001
