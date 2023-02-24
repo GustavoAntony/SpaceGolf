@@ -2,9 +2,11 @@
 
 ## Descrição do jogo e objetivo:
 
-O jogo mimetiza uma partida de Golf no espaço, na qual o principal objetivo do jogador é acertar a bolinha na bandeira, sem que a sua contagem de vida chegue à zero.
+O jogo mimetiza uma partida de Golf no espaço.
 
 ## Regras do Jogo:
+
+**Objetivo**: Acertar a bolinha na bandeira.
 
 **Lançamento**: O lançamento é resultado de um vetor que é criado a partir da distância entre o ponto do clique e o ponto onde o clique é solto. Esse vetor é invertido e representado como uma reta dentro do jogo.
 
