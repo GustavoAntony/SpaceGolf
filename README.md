@@ -2,7 +2,7 @@
 
 ## Descrição do jogo:
 
-O jogo mimetiza uma partida de Golf no espaço.
+O jogo simula uma partida de Golf no espaço.
 
 ## Regras do Jogo:
 
